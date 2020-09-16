@@ -1,0 +1,59 @@
+﻿@model List<Person>
+@{
+    ViewData["Title"] = "Contact Manager";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Contact Manager</h1>
+</div>
+
+@if(Model.Count <= 0)
+{
+    <div>
+        <br /><br /><br />
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <center>                
+                <b>Initialize seed data for first time visit: @Html.ActionLink("Initialize data", "InitializeData", "Home")</b>
+            </center>
+        </div>
+    </div>
+}
+else
+{
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var person in Model)
+                {
+                <tr>
+                    <td>@person.Id</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>@person.DateOfBirth</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@person.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@person.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+}
+
